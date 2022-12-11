@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 internal interface PicPayNetworking {
     @GET("users")
-    suspend fun getUsers(): List<UserResponse>
+    suspend fun getUsers(): List<UserResponse>?
 }

@@ -24,12 +24,15 @@ internal class PicPayRepositoryImpl(
             service.getUsers()
         }
         if(!result.isFailure) {
-            val response = result.value as List<*>
-            insertUsersInCache(response)
-            return PicPayResult(
-                response.map { item -> (item as UserResponse).toDomain() }
-            )
-
+            return result.value?.let { responseValue ->
+                val response = responseValue as List<*>
+                insertUsersInCache(response)
+                PicPayResult(
+                    response.map { item -> (item as UserResponse).toDomain() }
+                )
+            } ?: kotlin.run {
+                PicPayResult(emptyList<UserModel>())
+            }
         } else {
             return try {
                 val databaseItems = database.getAllUsers()
