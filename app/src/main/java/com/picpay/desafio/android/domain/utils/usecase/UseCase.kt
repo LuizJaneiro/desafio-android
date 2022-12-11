@@ -5,13 +5,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 abstract class UseCase<out T, in P> {
-    protected abstract suspend fun execute(params: P): PicPayResult
+    protected abstract suspend fun execute(params: P): PicPayResult<T>
 
-    suspend operator fun invoke(params: P): PicPayResult = withContext(Dispatchers.IO) {
+    suspend operator fun invoke(params: P): PicPayResult<T> = withContext(Dispatchers.IO) {
         try {
             execute(params)
         } catch (t: Throwable) {
-            PicPayResult.failure(t)
+            PicPayResult.failure<T>(t)
         }
     }
 }
