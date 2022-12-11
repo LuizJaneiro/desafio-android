@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -28,7 +30,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-
+    buildFeatures {
+        viewBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -65,9 +69,6 @@ dependencies {
     implementation(Libs.coroutinesAndroid)
     testImplementation(Libs.coroutinesTest)
 
-    /*implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"*/
-
     implementation(Libs.gson)
 
     implementation(Libs.retrofit)
@@ -77,6 +78,9 @@ dependencies {
 
     implementation(Libs.picasso)
     implementation(Libs.circleImageView)
+
+    implementation(Libs.navigationUi)
+    implementation(Libs.navigationFragment)
 
     testImplementation(Libs.jUnit)
     testImplementation(Libs.mockk)

@@ -6,6 +6,7 @@ import Libs.VersionNumber.koin
 import Libs.VersionNumber.koinExt
 import Libs.VersionNumber.kotlinVersion
 import Libs.VersionNumber.lifecycle
+import Libs.VersionNumber.navigation
 
 object Libs {
     object VersionNumber {
@@ -36,6 +37,8 @@ object Libs {
         const val coreTesting = "2.1.0"
         const val androidTest = "1.4.0-rc01"
         const val espresso = "3.2.0"
+
+        const val navigation = "2.5.1"
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:$gradleVersion"
@@ -81,4 +84,8 @@ object Libs {
     const val testRunner = "androidx.test:runner:$androidTest"
     const val espressoCore = "androidx.test.espresso:espresso-core:$espresso"
     const val testCoreKtx = "androidx.test:core:$androidTest"
+
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigation"
+    const val navigationUi = "androidx.navigation:navigation-ui-ktx:$navigation"
+    const val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
 }
