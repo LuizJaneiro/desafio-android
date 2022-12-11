@@ -1,16 +1,17 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("kotlin-kapt")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
-    compileSdkVersion(33)
+    compileSdk = 33
     defaultConfig {
         applicationId = "com.picpay.desafio.android"
-        minSdkVersion(21)
-        targetSdkVersion(33)
+        minSdk = 21
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -28,6 +29,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "API_URL", "\"https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/\"")
         }
     }
     buildFeatures {
@@ -60,6 +62,10 @@ dependencies {
     implementation(Libs.koinAndroid)
     implementation(Libs.koinCoreExt)
     implementation(Libs.koinAndroidCompat)
+
+    implementation(Libs.roomRuntime)
+    implementation(Libs.roomKtx)
+    kapt(Libs.roomCompiler)
 
     implementation(Libs.lifecycleCommon)
     implementation(Libs.lifecycleRuntimeKtx)

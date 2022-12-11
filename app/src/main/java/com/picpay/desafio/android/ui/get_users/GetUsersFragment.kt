@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.picpay.desafio.android.R
 import com.picpay.desafio.android.databinding.FragmentGetUsersBinding
 import com.picpay.desafio.android.ui.get_users.adapter.UserListAdapter
 import com.picpay.desafio.android.ui.model.User
@@ -63,7 +64,9 @@ class GetUsersFragment : Fragment() {
         binding.userListProgressBar.visibility = View.GONE
         binding.recyclerView.visibility = View.GONE
 
-        Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_SHORT)
+        Toast.makeText(requireContext(),
+            throwable.message ?: getString(R.string.error),
+            Toast.LENGTH_SHORT)
             .show()
     }
 

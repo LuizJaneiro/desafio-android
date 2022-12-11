@@ -7,6 +7,7 @@ import Libs.VersionNumber.koinExt
 import Libs.VersionNumber.kotlinVersion
 import Libs.VersionNumber.lifecycle
 import Libs.VersionNumber.navigation
+import Libs.VersionNumber.room
 
 object Libs {
     object VersionNumber {
@@ -39,6 +40,7 @@ object Libs {
         const val espresso = "3.2.0"
 
         const val navigation = "2.5.1"
+        const val room = "2.4.1"
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:$gradleVersion"
@@ -58,7 +60,6 @@ object Libs {
     const val koinAndroidCompat = "io.insert-koin:koin-android-compat:$koin"
 
     const val lifecycleViewModelKtx =  "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
-    //const val lifecycleLiveDataKtx "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     const val lifecycleRuntimeKtx =  "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle"
     const val lifecycleCommon = "androidx.lifecycle:lifecycle-common-java8:$lifecycle"
 
@@ -68,7 +69,6 @@ object Libs {
 
     const val gson = "com.google.code.gson:gson:${VersionNumber.gson}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${VersionNumber.retrofit}"
-    //implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${VersionNumber.retrofit}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${VersionNumber.okHttp}"
     const val okHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${VersionNumber.okHttp}"
@@ -88,4 +88,8 @@ object Libs {
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigation"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:$navigation"
     const val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
+
+    const val roomRuntime = "androidx.room:room-runtime:$room"
+    const val roomCompiler = "androidx.room:room-compiler:$room"
+    const val roomKtx = "androidx.room:room-ktx:$room"
 }

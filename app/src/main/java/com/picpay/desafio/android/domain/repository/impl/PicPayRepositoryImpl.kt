@@ -7,16 +7,51 @@ import com.picpay.desafio.android.domain.utils.result.map
 import com.picpay.desafio.android.domain.utils.result.mapFailure
 import com.picpay.desafio.android.domain.utils.result.result
 import com.picpay.desafio.android.mappers.toDomain
-import com.picpay.desafio.android.networking.PicPayService
+import com.picpay.desafio.android.mappers.toEntity
+import com.picpay.desafio.android.service.database.UserDatabaseDao
+import com.picpay.desafio.android.service.database.UsersDatabase
+import com.picpay.desafio.android.service.networking.PicPayNetworking
+import com.picpay.desafio.android.service.networking.model.UserResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 internal class PicPayRepositoryImpl(
-    private val service: PicPayService
+    private val service: PicPayNetworking,
+    private val database: UserDatabaseDao
 ): PicPayRepository {
     override suspend fun getUsers(): PicPayResult<List<UserModel>> {
-        return result {
+        val result = result {
             service.getUsers()
-        }.map { response ->
-            response.map { item -> item.toDomain() }
-        }.mapFailure()
+        }
+        if(!result.isFailure) {
+            val response = result.value as List<*>
+            insertUsersInCache(response)
+            return PicPayResult(
+                response.map { item -> (item as UserResponse).toDomain() }
+            )
+
+        } else {
+            return try {
+                val databaseItems = database.getAllUsers()
+                PicPayResult(
+                    databaseItems.map { item ->
+                        item.toDomain()
+                    }
+                )
+            } catch (t: Throwable) {
+                PicPayResult.failure(t)
+            }
+        }
+    }
+
+    private suspend fun insertUsersInCache(list: List<*>) {
+        try {
+            database.deleteAll()
+            list.forEach { item ->
+                database.insert((item as UserResponse).toEntity())
+            }
+        } catch (t: Throwable) {
+            // todo: adicionar log
+        }
     }
 }
