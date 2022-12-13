@@ -65,7 +65,7 @@ class GetUsersFragment : Fragment() {
         binding.recyclerView.visibility = View.GONE
 
         Toast.makeText(requireContext(),
-            throwable.message ?: getString(R.string.error),
+            throwable.cause?.message ?: getString(R.string.error),
             Toast.LENGTH_SHORT)
             .show()
     }

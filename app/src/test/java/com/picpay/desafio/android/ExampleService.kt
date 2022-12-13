@@ -1,5 +1,6 @@
 package com.picpay.desafio.android
 
+/*
 class ExampleService(
     private val service: PicPayService
 ) {
@@ -9,4 +10,4 @@ class ExampleService(
 
         return users.body() ?: emptyList()
     }
-}
+}*/
